@@ -59,4 +59,27 @@ public:
         }
         return 0;
     }
+    
+
+        //deletes an element of the array by the given index
+    int del(int index)
+    {
+        for(int i = index; i < cruiser; i++){
+            this->array[i] = array[i + 1];
+        }
+        cruiser--;
+        return array[index];
+    }
+
+        //finds the given value and return it's index
+    int find(int value){
+        for(int i = 0; i < cruiser - 1; i++){
+            if(value == array[i]){
+                return i;
+            }
+        }
+    }
 };
+int main(){
+    return 0;
+}
