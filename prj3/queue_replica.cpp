@@ -14,6 +14,37 @@ public:
         this->size = 5;
         this->cruiser = -1;
     }
+    void dequeue(){
+        if(cruiser != -1 ){
+            for( int i = 0; i<=cruiser ; i++){
+
+                queue[i] = queue[i+1];
+            }
+            cruiser--;
+        }else{
+            is_empty();
+        }
+    }
+
+    void enqueue(int value )
+    {
+        if(cruiser == -1){
+            cruiser++;
+            queue[cruiser] = value ; 
+        }else{
+            cruiser++;
+            queue[cruiser] = value ;
+        }
+    }
+
+    bool is_full(){
+        if( cruiser == size-1 ){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 
     int peek()
     {
