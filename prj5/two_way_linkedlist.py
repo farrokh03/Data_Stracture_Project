@@ -62,36 +62,82 @@ class TwoWayLinkedList():
         else:
             print("List is Empty!!!")
 
-# Finished Methods Above
+    def remove_until_index(self, index):
+        current = self.head
+        position = 0
+        if (current):
+            while (current and position < index):
+                previous = current
+                current = current.next
+                position += 1
+            if (position < index):
+                print("index out of range")
+            elif index == 0:
+                self.remove_head()
+            elif index == self.list_size():
+                return 0
+            else:
+                removed_data = current.data
+                current.previous = None
+                previous.next = current
+                self.head = current
+                current = current.next
+                return removed_data
+        else:
+            print("Empty List!!")
 
     def remove_at_index(self, index):
-        pass
+        current = self.head
+        position = 0
+        if (current == None):
+            return 0
+        else:
+            print()
+        while current and position < index:
+            previous = current
+            current = current.next
+            position += 1
+
+        if index == 0:
+            return self.remove_head()
+        elif position < index:
+            print("index out of range")
+        elif (index == self.list_size() - 1):
+            self.remove_end()
+        else:
+            removed_data = current.data
+            previous.next = current.next
+            current.next = None
+            return removed_data
 
     def update_at_index(self, data, index):
         pass
 
     def insert_at_index(self, data, index):
-        pass
+        newNode = Node(data)
+        current = self.head
+        position = 0
+        while current and position < index:
+            previous = current
+            current = current.next
+            position += 1
+
+        if (index == 0):
+            self.insert_at_begin()
+        elif (index == self.list_size()):
+            self.insert_at_end()
+        elif (position < index):
+            print("Index out of range!!")
+        else:
+            current.previous = newNode
+            newNode.next = current
+            newNode.previous = previous
+            previous.next = newNode
+
+# Finished Methods Above
 
     def invert(self):
         pass
 
     def concatenate(self):
         pass
-
-
-sample = TwoWayLinkedList()
-
-
-sample.insert_at_end(4)
-sample.insert_at_end(2)
-sample.insert_at_end(1232)
-sample.insert_at_end(123212312)
-sample.insert_at_begin(2444)
-
-
-print("Size is :", sample.list_size())
-sample.display()
-
-# Bugs
-# If deleting continues with remove_end method until one node remain previous.next will be None
