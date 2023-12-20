@@ -12,7 +12,6 @@ class Sort:
             swapped = False
             for j in range(0, len(array) - i - 1):
                 if array[j] > array[j + 1]:
-                    temp = array[j + 1]
                     array[j], array[j + 1] = array[j + 1], array[j]
                     swapped = True
             if swapped == False:
@@ -76,14 +75,31 @@ class Sort:
 
         return output_array
 
+    def bucket_sort(self, array):
+        bucket_array = [[]] * len(array)
+        for i in array:
+            bucket_index = int(i * len(bucket_array))
+            bucket_array[bucket_index].append(i)
+
+        for i in range(len(bucket_array)):
+            bucket_array[i] = self.insertion_sort(bucket_array[i])
+
+        k = 0
+        for i in range(len(bucket_array)):
+            for j in range(len(bucket_array[i])):
+                try:
+                    array[k] = bucket_array[i][j]
+                    k += 1
+                except:
+                    continue
+        return array
+
     def merge_sort(self):
         pass
 
     def quick_sort(self):
         pass
 
-    def bucket_sort(self):
-        pass
 
 # unordered = [9, 3, 334, 123, 6, 1, 99, 100]
 
