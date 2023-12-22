@@ -94,8 +94,40 @@ class Sort:
                     continue
         return array
 
-    def merge_sort(self):
-        pass
+    def merge_sort(self, array):
+        if len(array) > 1:
+            mid = len(array) // 2
+
+            left = array[:mid]
+
+            right = array[mid:]
+
+            self.merge_sort(left)
+
+            self.merge_sort(right)
+
+            i = j = k = 0
+
+            while i < len(left) and j < len(right):
+                if left[i] <= right[j]:
+                    array[k] = left[i]
+                    i += 1
+                else:
+                    array[k] = right[j]
+                    j += 1
+                k += 1
+
+            while i < len(left):
+                array[k] = left[i]
+                i += 1
+                k += 1
+
+            while j < len(right):
+                array[k] = right[j]
+                j += 1
+                k += 1
+
+        return array
 
     def quick_sort(self):
         pass
@@ -109,4 +141,4 @@ unordered_counting = [2, 5, 3, 0, 2, 3, 0, 3, 1, 2, 2, 2]
 
 sample = Sort(unordered_counting)
 
-print(sample.counting_sort())
+print(sample.merge_sort(unordered_counting))
