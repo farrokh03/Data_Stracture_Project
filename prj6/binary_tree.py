@@ -59,30 +59,42 @@ class Node:
             self.right.post_order_display()
         print(self.data)
 
-    def delete(self, data):
-        if self.data:
-            if self.data > data:
-                self.left.delete(data)
-            elif self.data < data:
-                self.right.delete(data)
-            else:
-                if self.right:
-                    pass
+    def delete(self, root, data):
+        if root is None:
+            return root
         else:
-            return self
 
+            if root.data > data:
+                root.left = self.delete(root.left, data)
+                return root
+            elif root.data < data:
+                root.right = self.delete(root.right, data)
+                return root
 
-root = Node(10)
+            if root.left is None:
+                temp = root.right
+                del root
+                return temp
 
+            elif root.right is None:
+                temp = root.left
+                del root
+                return temp
 
-root.insert(4)
-root.insert(24)
+            else:
+                parent = root
 
-root.insert(55)
-root.insert(1)
+                successor = root.right
+                while successor.left:
+                    parent = successor
+                    successor = successor.left
 
-root.insert(99)
+                if parent != root:
+                    parent.left = successor.right
+                else:
+                    parent.right = successor.right
 
+                root.data = successor.data
 
-root.delete(1)
-root.in_order_display()
+                del successor
+                return root
