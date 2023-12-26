@@ -71,3 +71,7 @@ class HashTable:
 
         except:
             raise KeyError(key)
+
+    def has_table(self, key):
+        index = self.hash_func(key)
+        return index
