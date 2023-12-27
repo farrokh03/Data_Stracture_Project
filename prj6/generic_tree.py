@@ -25,22 +25,23 @@ class Tree(Node):
             current.next = new_node
             new_node.previous = current
 
-    # def remove(self, data, root):
-    #     while root.data != data:
-    #         for i in len(root.children):
-    #             self.remove(data, self.children[i])
+    def remove(self, data):
+        root = self
+        child = root.children
 
-    #     return root.data
+        try:
+            while child.data != data:
+                child = child.next
+        except:
+            raise NotImplementedError
 
+        if child.children.data != None:
+            child.data = child.children.data
+            child.children = child.children.next
 
-sample = Tree(10)
+        elif child.next == None:
+            child.previous.next = None
 
-sample.insert(5, sample)
-sample.insert(7, sample)
-sample.insert(40, sample)
-sample.insert(60, sample)
-
-sample.insert(100, sample.children)
-sample.insert(200, sample.children)
-
-print(sample.children.)
+        else:
+            sibling = child.next
+            root.children = sibling
