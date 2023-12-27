@@ -36,11 +36,18 @@ class Graph:
     def remove_vertex(self, vertex):
         del self.graph_dict[vertex]
 
-    def BFS(self):
+    def BFS(self, startVertex):
         pass
 
-    def DFS(self):
-        pass
+    def DFS(self, startVertex, visited=None):
+        if visited is None:
+            visited = []
+        visited.append(startVertex)
+        vertices = self.graph_dict[startVertex]
+        for vertex in vertices:
+            if vertex not in visited:
+                self.DFS(vertex, visited)
+        return visited
 
     def display_values(self):
         print(self.graph_dict)
@@ -64,3 +71,4 @@ sample.add_edge("b", "d")
 
 
 sample.display_values()
+print(sample.DFS("a"))
