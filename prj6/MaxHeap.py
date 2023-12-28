@@ -6,16 +6,16 @@ class MaxHeap:
     def insert(self, data):
         self.heap_array.append(data)
         self.size += 1
-        self.heap_insert_size(len(self.heap_array) - 1)
+        self.heap_insert_order(len(self.heap_array) - 1)
 
-    def heap_insert_size(self, size):
+    def heap_insert_order(self, size):
         parent = int((size - 1) / 2)
 
         if self.heap_array[parent] > 0:
             if self.heap_array[size] > self.heap_array[parent]:
                 self.heap_array[size], self.heap_array[parent] = self.heap_array[parent], self.heap_array[size]
 
-                self.heap_insert_size(parent)
+                self.heap_insert_order(parent)
 
     def remove_root(self):
         if self.size == 0:
