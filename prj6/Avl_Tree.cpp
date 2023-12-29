@@ -5,12 +5,12 @@ using namespace std;
 class AVLTree {
 private:
     struct TreeNode {
-        int value;
+        int Data;
         TreeNode* leftChild;
         TreeNode* RightChild;
         int Height;
 
-        TreeNode(int k) : value(k), leftChild(nullptr), RightChild(nullptr), Height(1) {}
+        TreeNode(int k) : Data(k), leftChild(nullptr), RightChild(nullptr), Height(1) {}
     };
 
     TreeNode* Root;
@@ -57,9 +57,9 @@ private:
         if (Node == nullptr)
             return new TreeNode(value);
 
-        if (value < Node->value)
+        if (value < Node->Data)
             Node->leftChild = InsertNode(Node->leftChild, value);
-        else if (value > Node->value)
+        else if (value > Node->Data)
             Node->RightChild = InsertNode(Node->RightChild, value);
         else
             return Node;
@@ -69,21 +69,21 @@ private:
         int balance = balanceFactor(Node);
 
      
-        if (balance > 1 && value < Node->leftChild->value)
+        if (balance > 1 && value < Node->leftChild->Data)
             return RightRotate(Node);
 
        
-        if (balance < -1 && value > Node->RightChild->value)
+        if (balance < -1 && value > Node->RightChild->Data)
             return leftRotate(Node);
 
         
-        if (balance > 1 && value > Node->leftChild->value) {
+        if (balance > 1 && value > Node->leftChild->Data) {
             Node->leftChild = leftRotate(Node->leftChild);
             return RightRotate(Node);
         }
 
     
-        if (balance < -1 && value < Node->RightChild->value) {
+        if (balance < -1 && value < Node->RightChild->Data) {
             Node->RightChild = RightRotate(Node->RightChild);
             return leftRotate(Node);
         }
@@ -98,14 +98,14 @@ private:
         return current;
     }
 
-    TreeNode* RemoveNode(TreeNode* Root, int value) {
+    TreeNode* RemoveNode(TreeNode* Root, int Data) {
         if (Root == nullptr)
             return Root;
 
-        if (value < Root->value)
-            Root->leftChild = RemoveNode(Root->leftChild, value);
-        else if (value > Root->value)
-            Root->RightChild = RemoveNode(Root->RightChild, value);
+        if (Data < Root->Data)
+            Root->leftChild = RemoveNode(Root->leftChild, Data);
+        else if (Data > Root->Data)
+            Root->RightChild = RemoveNode(Root->RightChild, Data);
         else {
             if ((Root->leftChild == nullptr) || (Root->RightChild == nullptr)) {
                 TreeNode* temp = Root->leftChild ? Root->leftChild : Root->RightChild;
@@ -118,8 +118,8 @@ private:
                 delete temp;
             } else {
                 TreeNode* temp = minValueNode(Root->RightChild);
-                Root->value = temp->value;
-                Root->RightChild = RemoveNode(Root->RightChild, temp->value);
+                Root->Data = temp->Data;
+                Root->RightChild = RemoveNode(Root->RightChild, temp->Data);
             }
         }
 
@@ -154,7 +154,7 @@ private:
     void inOrderTraversal(TreeNode* Node) {
         if (Node != nullptr) {
             inOrderTraversal(Node->leftChild);
-            cout << Node->value << " ";
+            cout << Node->Data << " ";
             inOrderTraversal(Node->RightChild);
         }
     }
@@ -162,12 +162,12 @@ private:
 public:
     AVLTree() : Root(nullptr) {}
 
-    void InsertNode(int value) {
-        Root = InsertNode(Root, value);
+    void InsertNode(int Data) {
+        Root = InsertNode(Root, Data);
     }
 
-    void remove(int value) {
-        Root = RemoveNode(Root, value);
+    void remove(int Data) {
+        Root = RemoveNode(Root, Data);
     }
 
     void printInOrder() {
@@ -190,7 +190,7 @@ public:
         for (int i = spacing; i < space; ++i) {
             cout << " ";
         }
-        cout << Node->value << "\n";
+        cout << Node->Data << "\n";
 
         displayTree(Node->leftChild, space);
     }
