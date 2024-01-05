@@ -129,16 +129,11 @@ class Sort:
 
         return array
 
-    def quick_sort(self):
-        pass
-
-
-# unordered = [9, 3, 334, 123, 6, 1, 99, 100]
-
-
-unordered_counting = [2, 5, 3, 0, 2, 3, 0, 3, 1, 2, 2, 2]
-
-
-sample = Sort(unordered_counting)
-
-print(sample.merge_sort(unordered_counting))
+    def quicksort(self, arr):
+        if len(arr) <= 1:
+            return arr
+        else:
+            pivot = arr[0]
+            left = [x for x in arr[1:] if x < pivot]
+            right = [x for x in arr[1:] if x >= pivot]
+            return self.quicksort(left) + [pivot] + self.quicksort(right)
