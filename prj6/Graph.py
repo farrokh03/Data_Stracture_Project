@@ -37,7 +37,23 @@ class Graph:
         del self.graph_dict[vertex]
 
     def BFS(self, startVertex):
-        pass
+
+        visited = [False] * (max(self.graph_dict) + 1)
+
+        queue = []
+
+        queue.append(startVertex)
+        visited[startVertex] = True
+
+        while queue:
+
+            s = queue.pop(0)
+            print(s, end=" ")
+
+            for i in self.graph_dict[s]:
+                if visited[i] == False:
+                    queue.append(i)
+                    visited[i] = True
 
     def DFS(self, startVertex, visited=None):
         if visited is None:
@@ -49,26 +65,5 @@ class Graph:
                 self.DFS(vertex, visited)
         return visited
 
-    def display_values(self):
+    def display_graph(self):
         print(self.graph_dict)
-
-
-sample = Graph()
-
-sample.add_vertex("a")
-sample.add_vertex("b")
-sample.add_vertex("c")
-sample.add_vertex("d")
-sample.add_vertex("e")
-
-sample.add_edge("a", "b")
-sample.add_edge("b", "c")
-sample.add_edge("c", "d")
-sample.add_edge("a", "e")
-sample.add_edge("e", "d")
-sample.add_edge("a", "d")
-sample.add_edge("b", "d")
-
-
-sample.display_values()
-print(sample.DFS("a"))
